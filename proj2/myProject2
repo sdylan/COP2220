@@ -1,0 +1,326 @@
+#!/bin/sh
+# This is a shell archive (produced by GNU sharutils 4.7).
+# To extract the files from this archive, save it to some FILE, remove
+# everything before the `#!/bin/sh' line above, then type `sh FILE'.
+#
+lock_dir=_sh17496
+# Made on 2017-06-08 13:45 EDT by <n00448518@osprey.unfcsd.unf.edu>.
+# Source directory was `/home/18/n00448518/cop2220/proj2'.
+#
+# Existing files will *not* be overwritten, unless `-c' is specified.
+#
+# This shar contains:
+# length mode       name
+# ------ ---------- ------------------------------------------
+#   3859 -rw-r--r-- quadratic.c
+#   2380 -rw-r--r-- myQuadratic
+#
+MD5SUM=${MD5SUM-md5sum}
+f=`${MD5SUM} --version | egrep '^md5sum .*(core|text)utils'`
+test -n "${f}" && md5check=true || md5check=false
+${md5check} || \
+  echo 'Note: not verifying md5sums.  Consider installing GNU coreutils.'
+save_IFS="${IFS}"
+IFS="${IFS}:"
+gettext_dir=FAILED
+locale_dir=FAILED
+first_param="$1"
+for dir in $PATH
+do
+  if test "$gettext_dir" = FAILED && test -f $dir/gettext \
+     && ($dir/gettext --version >/dev/null 2>&1)
+  then
+    case `$dir/gettext --version 2>&1 | sed 1q` in
+      *GNU*) gettext_dir=$dir ;;
+    esac
+  fi
+  if test "$locale_dir" = FAILED && test -f $dir/shar \
+     && ($dir/shar --print-text-domain-dir >/dev/null 2>&1)
+  then
+    locale_dir=`$dir/shar --print-text-domain-dir`
+  fi
+done
+IFS="$save_IFS"
+if test "$locale_dir" = FAILED || test "$gettext_dir" = FAILED
+then
+  echo=echo
+else
+  TEXTDOMAINDIR=$locale_dir
+  export TEXTDOMAINDIR
+  TEXTDOMAIN=sharutils
+  export TEXTDOMAIN
+  echo="$gettext_dir/gettext -s"
+fi
+if (echo "testing\c"; echo 1,2,3) | grep c >/dev/null
+then if (echo -n test; echo 1,2,3) | grep n >/dev/null
+     then shar_n= shar_c='
+'
+     else shar_n=-n shar_c= ; fi
+else shar_n= shar_c='\c' ; fi
+f=shar-touch.$$
+st1=200112312359.59
+st2=123123592001.59
+st2tr=123123592001.5 # old SysV 14-char limit
+st3=1231235901
+
+if touch -am -t ${st1} ${f} >/dev/null 2>&1 && \
+   test ! -f ${st1} && test -f ${f}; then
+  shar_touch='touch -am -t $1$2$3$4$5$6.$7 "$8"'
+
+elif touch -am ${st2} ${f} >/dev/null 2>&1 && \
+   test ! -f ${st2} && test ! -f ${st2tr} && test -f ${f}; then
+  shar_touch='touch -am $3$4$5$6$1$2.$7 "$8"'
+
+elif touch -am ${st3} ${f} >/dev/null 2>&1 && \
+   test ! -f ${st3} && test -f ${f}; then
+  shar_touch='touch -am $3$4$5$6$2 "$8"'
+
+else
+  shar_touch=:
+  echo
+  ${echo} 'WARNING: not restoring timestamps.  Consider getting and'
+  ${echo} 'installing GNU `touch'\'', distributed in GNU coreutils...'
+  echo
+fi
+rm -f ${st1} ${st2} ${st2tr} ${st3} ${f}
+#
+if test ! -d ${lock_dir}
+then : ; else ${echo} 'lock directory '${lock_dir}' exists'
+  exit 1
+fi
+if mkdir ${lock_dir}
+then ${echo} 'x - created lock directory `'${lock_dir}\''.'
+else ${echo} 'x - failed to create lock directory `'${lock_dir}\''.'
+  exit 1
+fi
+# ============= quadratic.c ==============
+if test -f 'quadratic.c' && test "$first_param" != -c; then
+  ${echo} 'x -SKIPPING quadratic.c (file already exists)'
+else
+${echo} 'x - extracting quadratic.c (text)'
+  sed 's/^X//' << 'SHAR_EOF' > 'quadratic.c' &&
+/* This program takes the coefficients of a quadratic equation input by the user
+X * and calculates the roots if they are real.  Then it prints the coefficients
+X * and if the roots are real it prints them, otherwise it tells the user the
+X * roots are complex.
+X * 	Written by: Samuel Schwartz	
+X *      Last update: 11:36 AM, June 7, 2017
+X */ 
+X
+#include <stdio.h>
+#include <math.h>
+X
+// Function Declarations
+void getData (double*, double*, double*);
+int calculateRoots (double, double, double, double*, double*);
+void printResults (double, double, double, int, double, double);
+X
+X
+int main (void)
+{
+X  // Local Definitions
+X    double coeff_a;             //coefficient A from quadratic
+X    double coeff_b;             //coefficient B from quadratic
+X    double coeff_c;             //coefficient C from quadratic
+X    int    discriminantSign;    //sign of discriminant(negative or not)
+X    double root_1;              //first solution for quadratic set  = 0
+X    double root_2;              //second solution for quadratic set = 0
+X
+X  // Statements / Function Calls
+X
+X    getData(&coeff_a, &coeff_b, &coeff_c);
+X    
+X    discriminantSign = calculateRoots (coeff_a, coeff_b, coeff_c, 
+X                                                 &root_1, &root_2);
+X
+X    printResults(coeff_a, coeff_b, coeff_c, discriminantSign, root_1, root_2);
+X
+X    return 0;
+} // main
+X
+void getData (double* numberA, double* numberB, double* numberC)
+{
+X  // Prints a quick overview detailing the program constraints and process
+X    printf("**************************************************\n");
+X    printf("* This program will solve the quadratic equation *\n");
+X    printf("* ax^2+bx+c = 0 for real number coefficients: a, *\n");
+X    printf("* b, and c. The program will:                    *\n");
+X    printf("* 1. Determine if the roots of the equation, are *\n");
+X    printf("*    complex and print a message accordingly.    *\n");
+X    printf("* 2. If the two roots are real numbers, then the *\n");
+X    printf("*    program will calculate the two roots using  *\n");
+X    printf("*    the quadratic formula and print them.       *\n");
+X    printf("**************************************************\n\n");
+X
+X  // Prompts user for coefficients and stores in calling function variables
+X    printf("Enter a :    ");
+X    scanf("%lf", numberA);
+X    printf("Enter b :    ");
+X    scanf("%lf", numberB);
+X    printf("Enter c :    ");
+X    scanf("%lf", numberC);
+X    return;
+} // getData
+X
+int calculateRoots (double  numA, 
+X                    double  numB, 
+X                    double  numC, 
+X                    double* plusRoot, 
+X                    double* minusRoot)
+{
+X  //Local Definitions
+X    double discriminant; 
+X  
+X  //Statements
+X    discriminant = numB * numB - 4 * numA * numC; //calculate discriminant
+X    
+X    if (discriminant < 0) 
+X        return -1;      // Tells calling function discriminant is negative
+X
+X    else      // If discriminant is >= 0 this calculates the real roots
+X    {
+X        *plusRoot = (-numB + sqrt(discriminant)) / (2 * numA);
+X        *minusRoot = (-numB - sqrt(discriminant)) / (2 * numA);
+X        return 1;    // Tells calling function discriminant is non negative 
+X    }
+X     
+} // calculateRoots
+X
+void printResults (double coefA, 
+X                   double coefB, 
+X                   double coefC, 
+X                   int    discr, 
+X                   double root1, 
+X                   double root2)
+{
+X    printf("\na:         %10f\nb:         %10f\nc:         %10f\n", 
+X                                  coefA, coefB, coefC); // prints coefficients
+X
+X    if (discr == -1)   // When discriminant is < 0 tells solutions are complex
+X       printf("\nThe roots are complex.\n\n"); 
+X   
+X    else         // When discriminant is non negative this prints the roots 
+X       printf("\nRoot 1:    %10f\nRoot 2:    %10f\n\n", root1, root2);
+X    
+X    return;
+} // printResults
+SHAR_EOF
+  (set 20 17 06 08 13 42 53 'quadratic.c'; eval "$shar_touch") &&
+  chmod 0644 'quadratic.c'
+if test $? -ne 0
+then ${echo} 'restore of quadratic.c failed'
+fi
+  if ${md5check}
+  then (
+       ${MD5SUM} -c >/dev/null 2>&1 || ${echo} 'quadratic.c: MD5 check failed'
+       ) << \SHAR_EOF
+ef980eeec8278b25588bbe8491f11ce6  quadratic.c
+SHAR_EOF
+  else
+test `LC_ALL=C wc -c < 'quadratic.c'` -ne 3859 && \
+  ${echo} 'restoration warning:  size of quadratic.c is not 3859'
+  fi
+fi
+# ============= myQuadratic ==============
+if test -f 'myQuadratic' && test "$first_param" != -c; then
+  ${echo} 'x -SKIPPING myQuadratic (file already exists)'
+else
+${echo} 'x - extracting myQuadratic (text)'
+  sed 's/^X//' << 'SHAR_EOF' > 'myQuadratic' &&
+Script started on Thu 08 Jun 2017 01:25:19 PM EDT
+[n00448518@osprey proj2]$ rm a.out
+[n00448518@osprey proj2]$ gcc -[Kquadratic.c -lm -o Quad
+[n00448518@osprey proj2]$ ./Quad
+**************************************************
+* This program will solve the quadratic equation *
+* ax^2+bx+c = 0 for real number coefficients: a, *
+* b, and c. The program will:                    *
+* 1. Determine if the roots of the equation, are *
+*    complex and print a message accordingly.    *
+* 2. If the two roots are real numbers, then the *
+*    program will calculate the two roots using  *
+*    the quadratic formula and print them.       *
+**************************************************
+X
+Enter a :    1
+Enter b :    1
+Enter c :    2
+X
+a:           1.000000
+b:           1.000000
+c:           2.000000
+X
+The roots are complex.
+X
+[n00448518@osprey proj2]$ ./Quad
+**************************************************
+* This program will solve the quadratic equation *
+* ax^2+bx+c = 0 for real number coefficients: a, *
+* b, and c. The program will:                    *
+* 1. Determine if the roots of the equation, are *
+*    complex and print a message accordingly.    *
+* 2. If the two roots are real numbers, then the *
+*    program will calculate the two roots using  *
+*    the quadratic formula and print them.       *
+**************************************************
+X
+Enter a :    1
+Enter b :    1
+Enter c :    -2
+X
+a:           1.000000
+b:           1.000000
+c:          -2.000000
+X
+Root 1:      1.000000
+Root 2:     -2.000000
+X
+[n00448518@osprey proj2]$ ./Quad
+**************************************************
+* This program will solve the quadratic equation *
+* ax^2+bx+c = 0 for real number coefficients: a, *
+* b, and c. The program will:                    *
+* 1. Determine if the roots of the equation, are *
+*    complex and print a message accordingly.    *
+* 2. If the two roots are real numbers, then the *
+*    program will calculate the two roots using  *
+*    the quadratic formula and print them.       *
+**************************************************
+X
+Enter a :    1
+Enter b :    4
+Enter c :    4
+X
+a:           1.000000
+b:           4.000000
+c:           4.000000
+X
+Root 1:     -2.000000
+Root 2:     -2.000000
+X
+[n00448518@osprey proj2]$ exit
+X
+Script done on Thu 08 Jun 2017 01:26:47 PM EDT
+SHAR_EOF
+  (set 20 17 06 08 13 26 47 'myQuadratic'; eval "$shar_touch") &&
+  chmod 0644 'myQuadratic'
+if test $? -ne 0
+then ${echo} 'restore of myQuadratic failed'
+fi
+  if ${md5check}
+  then (
+       ${MD5SUM} -c >/dev/null 2>&1 || ${echo} 'myQuadratic: MD5 check failed'
+       ) << \SHAR_EOF
+abd039885ba372951d91220c297dba70  myQuadratic
+SHAR_EOF
+  else
+test `LC_ALL=C wc -c < 'myQuadratic'` -ne 2380 && \
+  ${echo} 'restoration warning:  size of myQuadratic is not 2380'
+  fi
+fi
+if rm -fr ${lock_dir}
+then ${echo} 'x - removed lock directory `'${lock_dir}\''.'
+else ${echo} 'x - failed to remove lock directory `'${lock_dir}\''.'
+  exit 1
+fi
+exit 0

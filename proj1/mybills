@@ -1,0 +1,93 @@
+Script started on Mon 22 May 2017 02:22:07 AM EDT
+[n00448518@osprey proj1]$ rm a,[K.out
+[n00448518@osprey proj1]$ gcc -o bills bill.c
+[n00448518@osprey proj1]$ ./bills
+Enter Length (feet, integer):		    23
+Enter Width (feet, integer):		    13
+Enter Customer Discount (Percent, integer): 12
+Enter Carpet Cost per square foot (xxx.xx): 14.28
+
+
+			MEASUREMENTS
+
+Length		    23 ft.
+Width		    13 ft.
+Area		   299 sq. ft.
+
+
+
+			CHARGES
+
+DESCRIPTION	COST/SQ.FT.		  CHARGE
+-----------	-----------		----------
+Carpet		14.28			$ 4269.72
+Labor		 0.35			$  104.65
+					----------
+INSTALLED PRICE				$ 4374.37
+Discount	   12%			$  524.92
+					----------
+SUBTOTAL				$ 3849.45
+Tax					$  327.20
+TOTAL					$ 4176.65
+					----------
+[n00448518@osprey proj1]$ ./bills
+Enter Length (feet, integer):		    35
+Enter Width (feet, integer):		    8
+Enter Customer Discount (Percent, integer): 0
+Enter Carpet Cost per square foot (xxx.xx): 8.00
+
+
+			MEASUREMENTS
+
+Length		    35 ft.
+Width		     8 ft.
+Area		   280 sq. ft.
+
+
+
+			CHARGES
+
+DESCRIPTION	COST/SQ.FT.		  CHARGE
+-----------	-----------		----------
+Carpet		 8.00			$ 2240.00
+Labor		 0.35			$   98.00
+					----------
+INSTALLED PRICE				$ 2338.00
+Discount	    0%			$    0.00
+					----------
+SUBTOTAL				$ 2338.00
+Tax					$  198.73
+TOTAL					$ 2536.73
+					----------
+[n00448518@osprey proj1]$ ./bills
+Enter Length (feet, integer):		    14
+Enter Width (feet, integer):		    11
+Enter Customer Discount (Percent, integer): 10
+Enter Carpet Cost per square foot (xxx.xx): 22.25
+
+
+			MEASUREMENTS
+
+Length		    14 ft.
+Width		    11 ft.
+Area		   154 sq. ft.
+
+
+
+			CHARGES
+
+DESCRIPTION	COST/SQ.FT.		  CHARGE
+-----------	-----------		----------
+Carpet		22.25			$ 3426.50
+Labor		 0.35			$   53.90
+					----------
+INSTALLED PRICE				$ 3480.40
+Discount	   10%			$  348.04
+					----------
+SUBTOTAL				$ 3132.36
+Tax					$  266.25
+TOTAL					$ 3398.61
+					----------
+[n00448518@osprey proj1]$ exit
+
+Script done on Mon 22 May 2017 02:23:37 AM EDT

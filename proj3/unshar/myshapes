@@ -1,0 +1,136 @@
+Script started on Tue 13 Jun 2017 10:54:48 PM EDT
+[n00448518@osprey proj3]$ rm a.out
+[n00448518@osprey proj3]$ gcc shapes.c -0[Ko printshapes
+[n00448518@osprey proj3]$ ./printshapes
+
+*****************************************************************
+**************** WELCOME TO THE PATTERN PRINTER! ****************
+*                                                               *
+*  Enter a code of 1 to print a square pattern of stars         *
+*  Enter a code of 2 to print a right triangle pattern of stars *
+*  Enter a code of 3 to print a diamond pattern of stars        *
+*  Enter a code of 0 to stop printing patterns                  *
+*                                                               *
+*****************************************************************
+You may now enter the code:  1
+Enter the size of the square (integer): 17
+
+
+*****************
+*****************
+*****************
+*****************
+*****************
+*****************
+*****************
+*****************
+*****************
+*****************
+*****************
+*****************
+*****************
+*****************
+*****************
+*****************
+*****************
+
+
+
+*****************************************************************
+**************** WELCOME TO THE PATTERN PRINTER! ****************
+*                                                               *
+*  Enter a code of 1 to print a square pattern of stars         *
+*  Enter a code of 2 to print a right triangle pattern of stars *
+*  Enter a code of 3 to print a diamond pattern of stars        *
+*  Enter a code of 0 to stop printing patterns                  *
+*                                                               *
+*****************************************************************
+You may now enter the code:  2
+Enter triangle's base (integer): 21
+
+
+*
+**
+***
+****
+*****
+******
+*******
+********
+*********
+**********
+***********
+************
+*************
+**************
+***************
+****************
+*****************
+******************
+*******************
+********************
+*********************
+
+
+
+*****************************************************************
+**************** WELCOME TO THE PATTERN PRINTER! ****************
+*                                                               *
+*  Enter a code of 1 to print a square pattern of stars         *
+*  Enter a code of 2 to print a right triangle pattern of stars *
+*  Enter a code of 3 to print a diamond pattern of stars        *
+*  Enter a code of 0 to stop printing patterns                  *
+*                                                               *
+*****************************************************************
+You may now enter the code:  3
+Enter the diamond's width (integer): 15
+
+
+       *
+      ***
+     *****
+    *******
+   *********
+  ***********
+ *************
+***************
+ *************
+  ***********
+   *********
+    *******
+     *****
+      ***
+       *
+
+
+
+*****************************************************************
+**************** WELCOME TO THE PATTERN PRINTER! ****************
+*                                                               *
+*  Enter a code of 1 to print a square pattern of stars         *
+*  Enter a code of 2 to print a right triangle pattern of stars *
+*  Enter a code of 3 to print a diamond pattern of stars        *
+*  Enter a code of 0 to stop printing patterns                  *
+*                                                               *
+*****************************************************************
+You may now enter the code:  5
+Incorrect code. Enter 1, 2, 3, or 0.
+
+*****************************************************************
+**************** WELCOME TO THE PATTERN PRINTER! ****************
+*                                                               *
+*  Enter a code of 1 to print a square pattern of stars         *
+*  Enter a code of 2 to print a right triangle pattern of stars *
+*  Enter a code of 3 to print a diamond pattern of stars        *
+*  Enter a code of 0 to stop printing patterns                  *
+*                                                               *
+*****************************************************************
+You may now enter the code:  0
+
+*****************************************************************
+*                          GOOD BYE!!!                          *
+*****************************************************************
+
+[n00448518@osprey proj3]$ exit
+
+Script done on Tue 13 Jun 2017 10:55:40 PM EDT

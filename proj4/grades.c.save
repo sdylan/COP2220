@@ -1,0 +1,216 @@
+/*  This program takes a class's quiz grades and calculates statistics. 
+ *  To do this it reads data from a separate file saved in the working 
+ *  directory and stores the student ID and their respective scores in 
+ *  various arrays. It then calculates the high, low and average score
+ *  for each quiz and stores the statistical data in their respective
+ *  arrays. Last the program prints the input data and statistics in a 
+ *  user friendly format that is easy to read.
+ *
+ *     Written by: Samuel Schwartz
+ *     Last Update: 11:04 AM June 23, 2017
+ */
+
+#include <stdio.h>
+
+#define MAX_STUDENTS 40
+#define MAX_QUIZZES  5
+
+void    getData(int  studentID[ ], 
+                int  studentScores[ ][MAX_QUIZZES], 
+                int* numStudents);
+
+void    calculate(int    Scores[ ][MAX_QUIZZES], 
+                  int    highScores[], 
+                  int    lowScores[], 
+                  double averageScores[], 
+                  int    numStudent);
+
+void    printResults(int    studentID[],
+                     int    studentScores[][MAX_QUIZZES],
+                     int    highScores[],
+                     int    lowScores[],
+                     double averageStudents[],
+                     int    numStudents);
+
+int     calcHiScore(int Scores[ ][MAX_QUIZZES], 
+                    int quiz_count, 
+                    int numStudents);
+
+int     calcLoScore(int Scores[ ][MAX_QUIZZES], 
+                    int quiz_count, 
+                    int numStudents); 
+
+double  calcAverage(int Scores[ ][MAX_QUIZZES], 
+                    int quiz_count, 
+                    int numStudents); 
+
+
+int main (void)
+{
+    int studentID[MAX_STUDENTS];
+    int studentScores[MAX_STUDENTS][MAX_QUIZZES];
+    int highScores[MAX_QUIZZES];
+    int lowScores[MAX_QUIZZES];
+    double averageScores[MAX_QUIZZES];
+    int numStudents;
+    
+    getData(studentID, studentScores, &numStudents);
+ 
+    calculate(studentScores, highScores, lowScores, 
+              averageScores, numStudents);
+
+    printResults(studentID, studentScores, highScores, 
+                 lowScores, averageScores, numStudents);
+           
+    return 0;
+}
+
+void getData(int stID[ ], int Scores[ ][MAX_QUIZZES], int* numStudents)
+{
+    int student_count = 0;
+    int quiz_count;
+    FILE* spIn;
+
+    spIn = fopen ("myfile.dat", "r");
+
+    while (fscanf(spIn, "%d", &stID[student_count]) != EOF)
+    {
+         for (quiz_count = 0; quiz_count < MAX_QUIZZES; quiz_count++)
+         { 
+              fscanf (spIn, "%d", &Scores[student_count][quiz_count]);
+         }
+        
+         student_count++;
+    }
+    
+    fclose(spIn);
+
+    *numStudents = student_count;
+
+    return;
+}
+              
+void calculate (int    Scores[][MAX_QUIZZES],
+                int    highScores[],
+                int    lowScores[],
+                double averageScores[],
+                int    numStudents)
+{ 
+    int quiz_count;
+
+    for (quiz_count = 0; quiz_count < MAX_QUIZZES; quiz_count++)
+    {
+         highScores[quiz_count] = calcHiScore(Scores, 
+                                              quiz_count, 
+                                              numStudents);
+          
+         lowScores[quiz_count] = calcLoScore(Scores,
+                                             quiz_count,
+                                             numStudents);
+
+         averageScores[quiz_count] = calcAverage(Scores,
+                                                 quiz_count,
+                                                 numStudents);
+    }
+ 
+    return;
+}
+
+void printResults (int    studentID[],
+                   int    studentScores[][MAX_QUIZZES],
+                   int    highScores[],
+                   int    lowScores[],
+                   double averageScores[],
+                   int    numStudents)
+{   
+    int quiz_count;
+    int student_count;
+     
+    printf("Student         Quiz 1   Quiz 2   Quiz 3   Quiz 4   Quiz 5\n");
+
+    for (student_count = 0; student_count < numStudents; student_count++)
+    {
+         printf("%7d           ", studentID[student_count]);
+    
+         for (quiz_count = 0; quiz_count < MAX_QUIZZES; quiz_count++)
+         {
+               printf("%-9d", studentScores[student_count][quiz_count]);
+         }
+    
+         printf("\n");
+    }
+                    
+    printf("High Score        ");
+
+    for (quiz_count = 0; quiz_count < MAX_QUIZZES; quiz_count++)
+         printf("%-9d", highScores[quiz_count]);
+    
+    printf("\n Low Score        ");
+
+    for (quiz_count = 0; quiz_count < MAX_QUIZZES; quiz_count++)
+         printf("%-9d", lowScores[quiz_count]);
+    
+    printf("\n  Average       ");
+         
+    for (quiz_count = 0; quiz_count < MAX_QUIZZES; quiz_count++)
+         printf("%-9.1f", averageScores[quiz_count]);
+
+    printf("\n");
+    
+    return;
+
+}
+
+int calcHiScore (int Scores[][MAX_QUIZZES], 
+                 int quiz_count, 
+                 int numStudents)
+{
+    int highResult;
+    int student_count;
+
+    highResult = Scores[0][quiz_count];
+
+    for (student_count = 1; student_count < numStudents; student_count++)
+    {
+        if (Scores[student_count][quiz_count] > highResult)
+            highResult = Scores[student_count][quiz_count];
+    }
+
+    return highResult;
+}
+
+int calcLoScore (int Scores[][MAX_QUIZZES], 
+                 int quiz_count, 
+                 int numStudents)
+{
+    int lowResult;
+    int student_count;
+
+    lowResult = Scores[0][quiz_count];
+
+    for (student_count = 1; student_count < numStudents; student_count++)
+    {
+        if (Scores[student_count][quiz_count] < lowResult)
+            lowResult = Scores[student_count][quiz_count];
+    }
+
+    return lowResult;
+}
+
+double calcAverage (int Scores[][MAX_QUIZZES],
+                    int quiz_count,
+                    int numStudents)
+{
+    double averageResult;
+    int student_count;
+    int sum = 0;
+
+    for (student_count = 0; student_count < numStudents; student_count++)
+    {
+        sum += Scores[student_count][quiz_count];
+    }
+
+    averageResult = (double) sum / student_count;
+
+    return averageResult;
+} 

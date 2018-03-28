@@ -1,0 +1,74 @@
+Script started on Thu 08 Jun 2017 01:25:19 PM EDT
+[n00448518@osprey proj2]$ rm a.out
+[n00448518@osprey proj2]$ gcc -[Kquadratic.c -lm -o Quad
+[n00448518@osprey proj2]$ ./Quad
+**************************************************
+* This program will solve the quadratic equation *
+* ax^2+bx+c = 0 for real number coefficients: a, *
+* b, and c. The program will:                    *
+* 1. Determine if the roots of the equation, are *
+*    complex and print a message accordingly.    *
+* 2. If the two roots are real numbers, then the *
+*    program will calculate the two roots using  *
+*    the quadratic formula and print them.       *
+**************************************************
+
+Enter a :    1
+Enter b :    1
+Enter c :    2
+
+a:           1.000000
+b:           1.000000
+c:           2.000000
+
+The roots are complex.
+
+[n00448518@osprey proj2]$ ./Quad
+**************************************************
+* This program will solve the quadratic equation *
+* ax^2+bx+c = 0 for real number coefficients: a, *
+* b, and c. The program will:                    *
+* 1. Determine if the roots of the equation, are *
+*    complex and print a message accordingly.    *
+* 2. If the two roots are real numbers, then the *
+*    program will calculate the two roots using  *
+*    the quadratic formula and print them.       *
+**************************************************
+
+Enter a :    1
+Enter b :    1
+Enter c :    -2
+
+a:           1.000000
+b:           1.000000
+c:          -2.000000
+
+Root 1:      1.000000
+Root 2:     -2.000000
+
+[n00448518@osprey proj2]$ ./Quad
+**************************************************
+* This program will solve the quadratic equation *
+* ax^2+bx+c = 0 for real number coefficients: a, *
+* b, and c. The program will:                    *
+* 1. Determine if the roots of the equation, are *
+*    complex and print a message accordingly.    *
+* 2. If the two roots are real numbers, then the *
+*    program will calculate the two roots using  *
+*    the quadratic formula and print them.       *
+**************************************************
+
+Enter a :    1
+Enter b :    4
+Enter c :    4
+
+a:           1.000000
+b:           4.000000
+c:           4.000000
+
+Root 1:     -2.000000
+Root 2:     -2.000000
+
+[n00448518@osprey proj2]$ exit
+
+Script done on Thu 08 Jun 2017 01:26:47 PM EDT

@@ -1,0 +1,457 @@
+#!/bin/sh
+# This is a shell archive (produced by GNU sharutils 4.7).
+# To extract the files from this archive, save it to some FILE, remove
+# everything before the `#!/bin/sh' line above, then type `sh FILE'.
+#
+lock_dir=_sh03613
+# Made on 2017-06-23 15:46 EDT by <n00448518@osprey.unfcsd.unf.edu>.
+# Source directory was `/home/18/n00448518/cop2220/proj4'.
+#
+# Existing files will *not* be overwritten, unless `-c' is specified.
+#
+# This shar contains:
+# length mode       name
+# ------ ---------- ------------------------------------------
+#   9519 -rw-r--r-- grades.c
+#    451 -rw-r--r-- myfile.dat
+#   1490 -rw-r--r-- mygrades
+#
+MD5SUM=${MD5SUM-md5sum}
+f=`${MD5SUM} --version | egrep '^md5sum .*(core|text)utils'`
+test -n "${f}" && md5check=true || md5check=false
+${md5check} || \
+  echo 'Note: not verifying md5sums.  Consider installing GNU coreutils.'
+save_IFS="${IFS}"
+IFS="${IFS}:"
+gettext_dir=FAILED
+locale_dir=FAILED
+first_param="$1"
+for dir in $PATH
+do
+  if test "$gettext_dir" = FAILED && test -f $dir/gettext \
+     && ($dir/gettext --version >/dev/null 2>&1)
+  then
+    case `$dir/gettext --version 2>&1 | sed 1q` in
+      *GNU*) gettext_dir=$dir ;;
+    esac
+  fi
+  if test "$locale_dir" = FAILED && test -f $dir/shar \
+     && ($dir/shar --print-text-domain-dir >/dev/null 2>&1)
+  then
+    locale_dir=`$dir/shar --print-text-domain-dir`
+  fi
+done
+IFS="$save_IFS"
+if test "$locale_dir" = FAILED || test "$gettext_dir" = FAILED
+then
+  echo=echo
+else
+  TEXTDOMAINDIR=$locale_dir
+  export TEXTDOMAINDIR
+  TEXTDOMAIN=sharutils
+  export TEXTDOMAIN
+  echo="$gettext_dir/gettext -s"
+fi
+if (echo "testing\c"; echo 1,2,3) | grep c >/dev/null
+then if (echo -n test; echo 1,2,3) | grep n >/dev/null
+     then shar_n= shar_c='
+'
+     else shar_n=-n shar_c= ; fi
+else shar_n= shar_c='\c' ; fi
+f=shar-touch.$$
+st1=200112312359.59
+st2=123123592001.59
+st2tr=123123592001.5 # old SysV 14-char limit
+st3=1231235901
+
+if touch -am -t ${st1} ${f} >/dev/null 2>&1 && \
+   test ! -f ${st1} && test -f ${f}; then
+  shar_touch='touch -am -t $1$2$3$4$5$6.$7 "$8"'
+
+elif touch -am ${st2} ${f} >/dev/null 2>&1 && \
+   test ! -f ${st2} && test ! -f ${st2tr} && test -f ${f}; then
+  shar_touch='touch -am $3$4$5$6$1$2.$7 "$8"'
+
+elif touch -am ${st3} ${f} >/dev/null 2>&1 && \
+   test ! -f ${st3} && test -f ${f}; then
+  shar_touch='touch -am $3$4$5$6$2 "$8"'
+
+else
+  shar_touch=:
+  echo
+  ${echo} 'WARNING: not restoring timestamps.  Consider getting and'
+  ${echo} 'installing GNU `touch'\'', distributed in GNU coreutils...'
+  echo
+fi
+rm -f ${st1} ${st2} ${st2tr} ${st3} ${f}
+#
+if test ! -d ${lock_dir}
+then : ; else ${echo} 'lock directory '${lock_dir}' exists'
+  exit 1
+fi
+if mkdir ${lock_dir}
+then ${echo} 'x - created lock directory `'${lock_dir}\''.'
+else ${echo} 'x - failed to create lock directory `'${lock_dir}\''.'
+  exit 1
+fi
+# ============= grades.c ==============
+if test -f 'grades.c' && test "$first_param" != -c; then
+  ${echo} 'x -SKIPPING grades.c (file already exists)'
+else
+${echo} 'x - extracting grades.c (text)'
+  sed 's/^X//' << 'SHAR_EOF' > 'grades.c' &&
+/*  This program takes a class's quiz grades and calculates statistics. 
+X *  To do this it reads data from a separate file saved in the working 
+X *  directory and stores the student ID and their respective scores in 
+X *  various arrays. It then calculates the high, low and average score
+X *  for each quiz and stores the statistical data in their respective
+X *  arrays. Last the program prints the input data and statistics in a 
+X *  user friendly format that is easy to read.
+X *
+X *     Written by: Samuel Schwartz
+X *     Last Update: 11:04 AM June 23, 2017
+X */
+X
+#include <stdio.h>
+X
+#define MAX_STUDENTS 40 //Maximum amount of students in the class
+#define MAX_QUIZZES  5  //Maximum amount of quizzes taken
+X
+// Function declarations
+void    getData(int  studentID[ ], 
+X                int  studentScores[ ][MAX_QUIZZES], 
+X                int* numStudents);
+X
+void    calculate(int    Scores[ ][MAX_QUIZZES], 
+X                  int    highScores[], 
+X                  int    lowScores[], 
+X                  double averageScores[], 
+X                  int    numStudent);
+X
+void    printResults(int    studentID[],
+X                     int    studentScores[][MAX_QUIZZES],
+X                     int    highScores[],
+X                     int    lowScores[],
+X                     double averageStudents[],
+X                     int    numStudents);
+X
+int     calcHiScore(int Scores[ ][MAX_QUIZZES], 
+X                    int quiz_count, 
+X                    int numStudents);
+X
+int     calcLoScore(int Scores[ ][MAX_QUIZZES], 
+X                    int quiz_count, 
+X                    int numStudents); 
+X
+double  calcAverage(int Scores[ ][MAX_QUIZZES], 
+X                    int quiz_count, 
+X                    int numStudents); 
+X
+X
+int main (void)
+{
+X    int studentID[MAX_STUDENTS];                   //list of student ID's
+X    int studentScores[MAX_STUDENTS][MAX_QUIZZES];  //list of student's quiz scores
+X    int highScores[MAX_QUIZZES];                   //list of high scores per quiz
+X    int lowScores[MAX_QUIZZES];                    //list of low scores per quiz
+X    double averageScores[MAX_QUIZZES];             //list of average scores per quiz
+X    int numStudents;                               //number of students in class
+X    
+X    getData(studentID, studentScores, &numStudents); //acquire id's, scores and # of 
+X                                                     //students from file
+X                                                     
+X    calculate(studentScores, highScores, lowScores,  //calculate the high, low and,  
+X              averageScores, numStudents);           //average scores per quiz
+X
+X    printResults(studentID, studentScores, highScores,   //prints all id's scores and
+X                 lowScores, averageScores, numStudents); //statistics in readable table
+X           
+X    return 0;
+X
+}  //main
+X
+void getData(int stID[ ], int Scores[ ][MAX_QUIZZES], int* numStudents)
+{
+X    int student_count = 0;   //counter to count the number of students
+X    int quiz_count;          //for-loop counter for the number of quizzes processed
+X    FILE* spIn;              //file pointer used to open and close read file
+X
+X    spIn = fopen ("myfile.dat", "r");  //open file to read student id's and scores
+X
+X    while (fscanf(spIn, "%d", &stID[student_count]) != EOF) //read id to studentID
+X    {                                                       //until end of file reached
+X
+X        //read the individual quiz scores into their respective locations in array   
+X         for (quiz_count = 0; quiz_count < MAX_QUIZZES; quiz_count++)  
+X         {                           
+X              fscanf (spIn, "%d", &Scores[student_count][quiz_count]);
+X         }  //for
+X        
+X         student_count++; //count the amount of students processed
+X    }  //while
+X    
+X    fclose(spIn);         //close file for resource management
+X
+X    *numStudents = student_count;   //store the amount of students in memory location
+X                                    //used in main
+X    return;
+X
+}  //getData
+X              
+void calculate (int    Scores[][MAX_QUIZZES],
+X                int    highScores[],
+X                int    lowScores[],
+X                double averageScores[],
+X                int    numStudents)
+{ 
+X    int quiz_count;      //for-loop counter for the number of quizzes processed
+X
+X    for (quiz_count = 0; quiz_count < MAX_QUIZZES; quiz_count++)
+X    {
+X        //Set high score for specific quiz based on result of calcHiScore function
+X        //for that particular quiz
+X         highScores[quiz_count] = calcHiScore(Scores, 
+X                                              quiz_count, 
+X                                              numStudents);
+X
+X        //Set low score for specific quiz based on result of calcLoScore function
+X        //for that particular quiz
+X         lowScores[quiz_count] = calcLoScore(Scores,
+X                                             quiz_count,
+X                                             numStudents);
+X
+X        //Set average score for specific quiz based on result of calcAverage function
+X        //for that particular quiz
+X         averageScores[quiz_count] = calcAverage(Scores,
+X                                                 quiz_count,
+X                                                 numStudents);
+X    }  //for
+X 
+X    return;
+X
+}  //calculate
+X
+void printResults (int    studentID[],
+X                   int    studentScores[][MAX_QUIZZES],
+X                   int    highScores[],
+X                   int    lowScores[],
+X                   double averageScores[],
+X                   int    numStudents)
+{   
+X    int quiz_count;     //for-loop counter for quizzes processed
+X    int student_count;  //for-loop counter for students processed
+X     
+X   //Print the header line for the following columns in table
+X    printf("Student         Quiz 1   Quiz 2   Quiz 3   Quiz 4   Quiz 5\n");
+X
+X   //For each student prints the student id and specific quiz scores under their
+X   //respective columns then go to newline.
+X    for (student_count = 0; student_count < numStudents; student_count++)
+X    {
+X         printf("%7d           ", studentID[student_count]);
+X    
+X         for (quiz_count = 0; quiz_count < MAX_QUIZZES; quiz_count++)
+X         {
+X               printf("%-9d", studentScores[student_count][quiz_count]);
+X         }  //for
+X    
+X         printf("\n");
+X    }  //for
+X                    
+X    printf("High Score        ");   //print high score row header
+X
+X   //print the high scores under the respective quiz column
+X    for (quiz_count = 0; quiz_count < MAX_QUIZZES; quiz_count++)
+X         printf("%-9d", highScores[quiz_count]);
+X    
+X    printf("\n Low Score        "); //On a newline prints low score row header
+X
+X   //print the low scores under the respective quiz columns
+X    for (quiz_count = 0; quiz_count < MAX_QUIZZES; quiz_count++)
+X         printf("%-9d", lowScores[quiz_count]);
+X    
+X    printf("\n  Average       ");  //On a newline prints the average row header
+X         
+X   //print the average scores under the respective quiz columns
+X    for (quiz_count = 0; quiz_count < MAX_QUIZZES; quiz_count++)
+X         printf("%-9.1f", averageScores[quiz_count]);
+X
+X    printf("\n"); //New line for spacing
+X    
+X    return;
+X
+}  //printResults
+X
+int calcHiScore (int Scores[][MAX_QUIZZES], 
+X                 int quiz_count, 
+X                 int numStudents)
+{
+X    int highResult;      //used to store the high score for a specific quiz
+X    int student_count;   //for-loop counter for # of processed students
+X
+X    highResult = Scores[0][quiz_count]; //set high score to first student's score
+X
+X   //For each student compare their score to the current high score if it is larger
+X   //set that score as the high score.
+X    for (student_count = 1; student_count < numStudents; student_count++)
+X    {
+X        if (Scores[student_count][quiz_count] > highResult)
+X            highResult = Scores[student_count][quiz_count];
+X    }
+X
+X    return highResult;  //Send the high score to calculate function
+X
+}  //calcHiScore
+X
+int calcLoScore (int Scores[][MAX_QUIZZES], 
+X                 int quiz_count, 
+X                 int numStudents)
+{
+X    int lowResult;     //used to store the low score for a specific quiz
+X    int student_count; //for-loop counter for # of processed students
+X
+X    lowResult = Scores[0][quiz_count]; //set low score to first student's score
+X
+X   //For each student compare their score to the current high score if it is smaller
+X   //set that score as the low score.
+X    for (student_count = 1; student_count < numStudents; student_count++)
+X    {
+X        if (Scores[student_count][quiz_count] < lowResult)
+X            lowResult = Scores[student_count][quiz_count];
+X    }
+X
+X    return lowResult; //Send the low score to the calculate function
+X
+}  //calcLoScore
+X
+double calcAverage (int Scores[][MAX_QUIZZES],
+X                    int quiz_count,
+X                    int numStudents)
+{
+X    double averageResult; //used to store the average score for a specific quiz
+X    int student_count;    //for-loop counter for # of processed students
+X    int sum = 0;          //used to store the total sum of the quiz scores used in 
+X                          //the average calculation
+X
+X   //Sum the students' quiz scores for a particular quiz that was sent by calculate 
+X   //function. 
+X    for (student_count = 0; student_count < numStudents; student_count++)
+X    {
+X        sum += Scores[student_count][quiz_count];
+X    }
+X
+X    averageResult = (double) sum / numStudents; //calculates average quiz score
+X
+X    return averageResult; //Send average score to calculate function
+X
+}  //calcAverage 
+SHAR_EOF
+  (set 20 17 06 23 15 46 13 'grades.c'; eval "$shar_touch") &&
+  chmod 0644 'grades.c'
+if test $? -ne 0
+then ${echo} 'restore of grades.c failed'
+fi
+  if ${md5check}
+  then (
+       ${MD5SUM} -c >/dev/null 2>&1 || ${echo} 'grades.c: MD5 check failed'
+       ) << \SHAR_EOF
+4963842f470520ec14257601d975ce5a  grades.c
+SHAR_EOF
+  else
+test `LC_ALL=C wc -c < 'grades.c'` -ne 9519 && \
+  ${echo} 'restoration warning:  size of grades.c is not 9519'
+  fi
+fi
+# ============= myfile.dat ==============
+if test -f 'myfile.dat' && test "$first_param" != -c; then
+  ${echo} 'x -SKIPPING myfile.dat (file already exists)'
+else
+${echo} 'x - extracting myfile.dat (text)'
+  sed 's/^X//' << 'SHAR_EOF' > 'myfile.dat' &&
+1234   52    7  100   78   34
+2134   90   36   90   77   30
+3124  100   45   20   90   70
+4532   11   17   81   32   77
+5678   20   12   45   78   34
+6134   34   80   55   78   45
+7874   60  100   56   78   78 
+8026   70   10   66   78   56
+9893   34    9   77   78   20
+1947   45   40   88   78   55
+2877   55   50   99   78   80
+3189   22   70  100   78   77
+4602   89   50   91   78   60
+5405   11   11    0   78   10
+6999    0   98   89   78   20
+SHAR_EOF
+  (set 20 17 06 22 22 52 02 'myfile.dat'; eval "$shar_touch") &&
+  chmod 0644 'myfile.dat'
+if test $? -ne 0
+then ${echo} 'restore of myfile.dat failed'
+fi
+  if ${md5check}
+  then (
+       ${MD5SUM} -c >/dev/null 2>&1 || ${echo} 'myfile.dat: MD5 check failed'
+       ) << \SHAR_EOF
+6294fbf6981db0ea0608051ffb66dfbf  myfile.dat
+SHAR_EOF
+  else
+test `LC_ALL=C wc -c < 'myfile.dat'` -ne 451 && \
+  ${echo} 'restoration warning:  size of myfile.dat is not 451'
+  fi
+fi
+# ============= mygrades ==============
+if test -f 'mygrades' && test "$first_param" != -c; then
+  ${echo} 'x -SKIPPING mygrades (file already exists)'
+else
+${echo} 'x - extracting mygrades (text)'
+  sed 's/^X//' << 'SHAR_EOF' > 'mygrades' &&
+Script started on Thu 22 Jun 2017 11:49:56 PM EDT
+[n00448518@osprey proj4]$ rm a.out
+[n00448518@osprey proj4]$ gcc grades.c -o printgrades
+[n00448518@osprey proj4]$ ./printgrades
+Student         Quiz 1   Quiz 2   Quiz 3   Quiz 4   Quiz 5
+X   1234           52       7        100      78       34       
+X   2134           90       36       90       77       30       
+X   3124           100      45       20       90       70       
+X   4532           11       17       81       32       77       
+X   5678           20       12       45       78       34       
+X   6134           34       80       55       78       45       
+X   7874           60       100      56       78       78       
+X   8026           70       10       66       78       56       
+X   9893           34       9        77       78       20       
+X   1947           45       40       88       78       55       
+X   2877           55       50       99       78       80       
+X   3189           22       70       100      78       77       
+X   4602           89       50       91       78       60       
+X   5405           11       11       0        78       10       
+X   6999           0        98       89       78       20       
+High Score        100      100      100      90       80       
+X Low Score        0        7        0        32       10       
+X  Average       46.2     42.3     70.5     75.7     49.7     
+[n00448518@osprey proj4]$ exit
+X
+Script done on Thu 22 Jun 2017 11:50:42 PM EDT
+SHAR_EOF
+  (set 20 17 06 22 23 50 42 'mygrades'; eval "$shar_touch") &&
+  chmod 0644 'mygrades'
+if test $? -ne 0
+then ${echo} 'restore of mygrades failed'
+fi
+  if ${md5check}
+  then (
+       ${MD5SUM} -c >/dev/null 2>&1 || ${echo} 'mygrades: MD5 check failed'
+       ) << \SHAR_EOF
+f48a1b15889a0c48ad4a40bd8e58032a  mygrades
+SHAR_EOF
+  else
+test `LC_ALL=C wc -c < 'mygrades'` -ne 1490 && \
+  ${echo} 'restoration warning:  size of mygrades is not 1490'
+  fi
+fi
+if rm -fr ${lock_dir}
+then ${echo} 'x - removed lock directory `'${lock_dir}\''.'
+else ${echo} 'x - failed to remove lock directory `'${lock_dir}\''.'
+  exit 1
+fi
+exit 0

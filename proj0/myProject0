@@ -1,0 +1,261 @@
+#!/bin/sh
+# This is a shell archive (produced by GNU sharutils 4.7).
+# To extract the files from this archive, save it to some FILE, remove
+# everything before the `#!/bin/sh' line above, then type `sh FILE'.
+#
+lock_dir=_sh26817
+# Made on 2017-05-15 16:04 EDT by <n00448518@osprey.unfcsd.unf.edu>.
+# Source directory was `/home/18/n00448518'.
+#
+# Existing files will *not* be overwritten, unless `-c' is specified.
+#
+# This shar contains:
+# length mode       name
+# ------ ---------- ------------------------------------------
+#   1078 -rw-r--r-- typescript
+#    395 -rw-r--r-- myoutput
+#   1017 -rw-r--r-- cop2220/proj0/try.c
+#
+MD5SUM=${MD5SUM-md5sum}
+f=`${MD5SUM} --version | egrep '^md5sum .*(core|text)utils'`
+test -n "${f}" && md5check=true || md5check=false
+${md5check} || \
+  echo 'Note: not verifying md5sums.  Consider installing GNU coreutils.'
+save_IFS="${IFS}"
+IFS="${IFS}:"
+gettext_dir=FAILED
+locale_dir=FAILED
+first_param="$1"
+for dir in $PATH
+do
+  if test "$gettext_dir" = FAILED && test -f $dir/gettext \
+     && ($dir/gettext --version >/dev/null 2>&1)
+  then
+    case `$dir/gettext --version 2>&1 | sed 1q` in
+      *GNU*) gettext_dir=$dir ;;
+    esac
+  fi
+  if test "$locale_dir" = FAILED && test -f $dir/shar \
+     && ($dir/shar --print-text-domain-dir >/dev/null 2>&1)
+  then
+    locale_dir=`$dir/shar --print-text-domain-dir`
+  fi
+done
+IFS="$save_IFS"
+if test "$locale_dir" = FAILED || test "$gettext_dir" = FAILED
+then
+  echo=echo
+else
+  TEXTDOMAINDIR=$locale_dir
+  export TEXTDOMAINDIR
+  TEXTDOMAIN=sharutils
+  export TEXTDOMAIN
+  echo="$gettext_dir/gettext -s"
+fi
+if (echo "testing\c"; echo 1,2,3) | grep c >/dev/null
+then if (echo -n test; echo 1,2,3) | grep n >/dev/null
+     then shar_n= shar_c='
+'
+     else shar_n=-n shar_c= ; fi
+else shar_n= shar_c='\c' ; fi
+f=shar-touch.$$
+st1=200112312359.59
+st2=123123592001.59
+st2tr=123123592001.5 # old SysV 14-char limit
+st3=1231235901
+
+if touch -am -t ${st1} ${f} >/dev/null 2>&1 && \
+   test ! -f ${st1} && test -f ${f}; then
+  shar_touch='touch -am -t $1$2$3$4$5$6.$7 "$8"'
+
+elif touch -am ${st2} ${f} >/dev/null 2>&1 && \
+   test ! -f ${st2} && test ! -f ${st2tr} && test -f ${f}; then
+  shar_touch='touch -am $3$4$5$6$1$2.$7 "$8"'
+
+elif touch -am ${st3} ${f} >/dev/null 2>&1 && \
+   test ! -f ${st3} && test -f ${f}; then
+  shar_touch='touch -am $3$4$5$6$2 "$8"'
+
+else
+  shar_touch=:
+  echo
+  ${echo} 'WARNING: not restoring timestamps.  Consider getting and'
+  ${echo} 'installing GNU `touch'\'', distributed in GNU coreutils...'
+  echo
+fi
+rm -f ${st1} ${st2} ${st2tr} ${st3} ${f}
+#
+if test ! -d ${lock_dir}
+then : ; else ${echo} 'lock directory '${lock_dir}' exists'
+  exit 1
+fi
+if mkdir ${lock_dir}
+then ${echo} 'x - created lock directory `'${lock_dir}\''.'
+else ${echo} 'x - failed to create lock directory `'${lock_dir}\''.'
+  exit 1
+fi
+# ============= typescript ==============
+if test -f 'typescript' && test "$first_param" != -c; then
+  ${echo} 'x -SKIPPING typescript (file already exists)'
+else
+${echo} 'x - extracting typescript (text)'
+  sed 's/^X//' << 'SHAR_EOF' > 'typescript' &&
+Script started on Mon 15 May 2017 03:52:08 PM EDT
+[n00448518@osprey ~]$ ls
+typescript
+[n00448518@osprey ~]$ mkdir cop2220
+[n00448518@osprey ~]$ cd cop222-[K0
+[n00448518@osprey cop2220]$ mkdir prok0[K[Kj0
+[n00448518@osprey cop2220]$ pwd
+/home/18/n00448518/cop2220
+[n00448518@osprey cop2220]$ cd
+[n00448518@osprey ~]$ pwd
+/home/18/n00448518
+[n00448518@osprey ~]$ ls -l
+total 4
+drwxr-xr-x. 3 n00448518 student 4096 May 15 15:52 [0m[01;34mcop2220[0m
+-rw-r--r--. 1 n00448518 student    0 May 15 15:52 typescript
+X[m[n00448518@osprey ~]$ chmod g-x cop2220o-x cop2220
+[n00448518@osprey ~]$ ls -l
+total 4
+drwxr--r--. 3 n00448518 student 4096 May 15 15:52 [0m[01;34mcop2220[0m
+-rw-r--r--. 1 n00448518 student    0 May 15 15:52 typescript
+X[m[n00448518@osprey ~]$ ls -lchmod go-x cop2220[C[Cx cop2220[K+x cop2220
+[n00448518@osprey ~]$ cd cop2220/proj0
+[n00448518@osprey proj0]$ pwd
+/home/18/n00448518/cop2220/proj0
+[n00448518@osprey proj0]$ exit
+X
+Script done on Mon 15 May 2017 03:54:19 PM EDT
+SHAR_EOF
+  (set 20 17 05 15 15 54 19 'typescript'; eval "$shar_touch") &&
+  chmod 0644 'typescript'
+if test $? -ne 0
+then ${echo} 'restore of typescript failed'
+fi
+  if ${md5check}
+  then (
+       ${MD5SUM} -c >/dev/null 2>&1 || ${echo} 'typescript: MD5 check failed'
+       ) << \SHAR_EOF
+a42ca477c5e54caa8936070ff9fc0a69  typescript
+SHAR_EOF
+  else
+test `LC_ALL=C wc -c < 'typescript'` -ne 1078 && \
+  ${echo} 'restoration warning:  size of typescript is not 1078'
+  fi
+fi
+# ============= myoutput ==============
+if test -f 'myoutput' && test "$first_param" != -c; then
+  ${echo} 'x -SKIPPING myoutput (file already exists)'
+else
+${echo} 'x - extracting myoutput (text)'
+  sed 's/^X//' << 'SHAR_EOF' > 'myoutput' &&
+Script started on Mon 15 May 2017 04:02:54 PM EDT
+[n00448518@osprey ~]$ cd cop2220/proj0
+[n00448518@osprey proj0]$ gcc -o tryout try,c[K[K.c
+[n00448518@osprey proj0]$ ./tryout
+Enter length in feet: 10.5
+Enter width in feet: 9.3
+Length:      10.50 Feet
+Width :       9.30 Feet
+Area :      97.65 Sq. Feet
+[n00448518@osprey proj0]$ exit
+X
+Script done on Mon 15 May 2017 04:03:51 PM EDT
+SHAR_EOF
+  (set 20 17 05 15 16 03 51 'myoutput'; eval "$shar_touch") &&
+  chmod 0644 'myoutput'
+if test $? -ne 0
+then ${echo} 'restore of myoutput failed'
+fi
+  if ${md5check}
+  then (
+       ${MD5SUM} -c >/dev/null 2>&1 || ${echo} 'myoutput: MD5 check failed'
+       ) << \SHAR_EOF
+d2d3b5e6d4c0b935bfa3dceb800f47b4  myoutput
+SHAR_EOF
+  else
+test `LC_ALL=C wc -c < 'myoutput'` -ne 395 && \
+  ${echo} 'restoration warning:  size of myoutput is not 395'
+  fi
+fi
+# ============= cop2220/proj0/try.c ==============
+if test ! -d 'cop2220'; then
+  mkdir 'cop2220'
+if test $? -eq 0
+then ${echo} 'x - created directory `cop2220'\''.'
+else ${echo} 'x - failed to create directory `cop2220'\''.'
+  exit 1
+fi
+fi
+if test ! -d 'cop2220/proj0'; then
+  mkdir 'cop2220/proj0'
+if test $? -eq 0
+then ${echo} 'x - created directory `cop2220/proj0'\''.'
+else ${echo} 'x - failed to create directory `cop2220/proj0'\''.'
+  exit 1
+fi
+fi
+if test -f 'cop2220/proj0/try.c' && test "$first_param" != -c; then
+  ${echo} 'x -SKIPPING cop2220/proj0/try.c (file already exists)'
+else
+${echo} 'x - extracting cop2220/proj0/try.c (text)'
+  sed 's/^X//' << 'SHAR_EOF' > 'cop2220/proj0/try.c' &&
+/*  C Source Code Begins Here */
+/*  This program prompts and receives as input the length and
+X    width of a room in feet; calculates the ares of the room;
+X    and outputs the length, width, and the area of the room.   */
+/*     This program has been written by: Asai Asaithambi.
+X    This program was last modified on: May 13, 2017            */
+X
+#include <stdio.h> // Preprocessor directive
+X
+int main (void)
+{
+X    float length;    // denotes length in feet
+X    float width;     // denotes width in feet
+X    float area;      // denotes area in sq. feet
+X
+/* Prompt for input and receive input */
+X
+X    printf ("Enter length in feet: ");
+X    scanf ("%f", &length);
+X    printf ("Enter width in feet: ");
+X    scanf ("%f", &width);
+X
+/* Calculate area = length times width */
+X
+X    area = length * width;
+X
+/* Print out results */
+X
+X    printf ("Length: %10.2f Feet\n", length);
+X    printf ("Width : %10.2f Feet\n", width);
+X    printf ("Area : %10.2f Sq. Feet\n", area);
+X
+X    return 0;
+} // main
+/* C Source Code ends here */
+SHAR_EOF
+  (set 20 17 05 15 16 00 30 'cop2220/proj0/try.c'; eval "$shar_touch") &&
+  chmod 0644 'cop2220/proj0/try.c'
+if test $? -ne 0
+then ${echo} 'restore of cop2220/proj0/try.c failed'
+fi
+  if ${md5check}
+  then (
+       ${MD5SUM} -c >/dev/null 2>&1 || ${echo} 'cop2220/proj0/try.c: MD5 check failed'
+       ) << \SHAR_EOF
+a2c0152b58e422ebf8d5831d09ae9428  cop2220/proj0/try.c
+SHAR_EOF
+  else
+test `LC_ALL=C wc -c < 'cop2220/proj0/try.c'` -ne 1017 && \
+  ${echo} 'restoration warning:  size of cop2220/proj0/try.c is not 1017'
+  fi
+fi
+if rm -fr ${lock_dir}
+then ${echo} 'x - removed lock directory `'${lock_dir}\''.'
+else ${echo} 'x - failed to remove lock directory `'${lock_dir}\''.'
+  exit 1
+fi
+exit 0

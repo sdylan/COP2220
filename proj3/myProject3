@@ -1,0 +1,479 @@
+#!/bin/sh
+# This is a shell archive (produced by GNU sharutils 4.7).
+# To extract the files from this archive, save it to some FILE, remove
+# everything before the `#!/bin/sh' line above, then type `sh FILE'.
+#
+lock_dir=_sh19695
+# Made on 2017-06-14 12:27 EDT by <n00448518@osprey.unfcsd.unf.edu>.
+# Source directory was `/home/18/n00448518/cop2220/proj3'.
+#
+# Existing files will *not* be overwritten, unless `-c' is specified.
+#
+# This shar contains:
+# length mode       name
+# ------ ---------- ------------------------------------------
+#   4636 -rw-r--r-- myshapes
+#   6369 -rw-r--r-- shapes.c
+#
+MD5SUM=${MD5SUM-md5sum}
+f=`${MD5SUM} --version | egrep '^md5sum .*(core|text)utils'`
+test -n "${f}" && md5check=true || md5check=false
+${md5check} || \
+  echo 'Note: not verifying md5sums.  Consider installing GNU coreutils.'
+save_IFS="${IFS}"
+IFS="${IFS}:"
+gettext_dir=FAILED
+locale_dir=FAILED
+first_param="$1"
+for dir in $PATH
+do
+  if test "$gettext_dir" = FAILED && test -f $dir/gettext \
+     && ($dir/gettext --version >/dev/null 2>&1)
+  then
+    case `$dir/gettext --version 2>&1 | sed 1q` in
+      *GNU*) gettext_dir=$dir ;;
+    esac
+  fi
+  if test "$locale_dir" = FAILED && test -f $dir/shar \
+     && ($dir/shar --print-text-domain-dir >/dev/null 2>&1)
+  then
+    locale_dir=`$dir/shar --print-text-domain-dir`
+  fi
+done
+IFS="$save_IFS"
+if test "$locale_dir" = FAILED || test "$gettext_dir" = FAILED
+then
+  echo=echo
+else
+  TEXTDOMAINDIR=$locale_dir
+  export TEXTDOMAINDIR
+  TEXTDOMAIN=sharutils
+  export TEXTDOMAIN
+  echo="$gettext_dir/gettext -s"
+fi
+if (echo "testing\c"; echo 1,2,3) | grep c >/dev/null
+then if (echo -n test; echo 1,2,3) | grep n >/dev/null
+     then shar_n= shar_c='
+'
+     else shar_n=-n shar_c= ; fi
+else shar_n= shar_c='\c' ; fi
+f=shar-touch.$$
+st1=200112312359.59
+st2=123123592001.59
+st2tr=123123592001.5 # old SysV 14-char limit
+st3=1231235901
+
+if touch -am -t ${st1} ${f} >/dev/null 2>&1 && \
+   test ! -f ${st1} && test -f ${f}; then
+  shar_touch='touch -am -t $1$2$3$4$5$6.$7 "$8"'
+
+elif touch -am ${st2} ${f} >/dev/null 2>&1 && \
+   test ! -f ${st2} && test ! -f ${st2tr} && test -f ${f}; then
+  shar_touch='touch -am $3$4$5$6$1$2.$7 "$8"'
+
+elif touch -am ${st3} ${f} >/dev/null 2>&1 && \
+   test ! -f ${st3} && test -f ${f}; then
+  shar_touch='touch -am $3$4$5$6$2 "$8"'
+
+else
+  shar_touch=:
+  echo
+  ${echo} 'WARNING: not restoring timestamps.  Consider getting and'
+  ${echo} 'installing GNU `touch'\'', distributed in GNU coreutils...'
+  echo
+fi
+rm -f ${st1} ${st2} ${st2tr} ${st3} ${f}
+#
+if test ! -d ${lock_dir}
+then : ; else ${echo} 'lock directory '${lock_dir}' exists'
+  exit 1
+fi
+if mkdir ${lock_dir}
+then ${echo} 'x - created lock directory `'${lock_dir}\''.'
+else ${echo} 'x - failed to create lock directory `'${lock_dir}\''.'
+  exit 1
+fi
+# ============= myshapes ==============
+if test -f 'myshapes' && test "$first_param" != -c; then
+  ${echo} 'x -SKIPPING myshapes (file already exists)'
+else
+${echo} 'x - extracting myshapes (text)'
+  sed 's/^X//' << 'SHAR_EOF' > 'myshapes' &&
+Script started on Tue 13 Jun 2017 10:54:48 PM EDT
+[n00448518@osprey proj3]$ rm a.out
+[n00448518@osprey proj3]$ gcc shapes.c -0[Ko printshapes
+[n00448518@osprey proj3]$ ./printshapes
+X
+*****************************************************************
+**************** WELCOME TO THE PATTERN PRINTER! ****************
+*                                                               *
+*  Enter a code of 1 to print a square pattern of stars         *
+*  Enter a code of 2 to print a right triangle pattern of stars *
+*  Enter a code of 3 to print a diamond pattern of stars        *
+*  Enter a code of 0 to stop printing patterns                  *
+*                                                               *
+*****************************************************************
+You may now enter the code:  1
+Enter the size of the square (integer): 17
+X
+X
+*****************
+*****************
+*****************
+*****************
+*****************
+*****************
+*****************
+*****************
+*****************
+*****************
+*****************
+*****************
+*****************
+*****************
+*****************
+*****************
+*****************
+X
+X
+X
+*****************************************************************
+**************** WELCOME TO THE PATTERN PRINTER! ****************
+*                                                               *
+*  Enter a code of 1 to print a square pattern of stars         *
+*  Enter a code of 2 to print a right triangle pattern of stars *
+*  Enter a code of 3 to print a diamond pattern of stars        *
+*  Enter a code of 0 to stop printing patterns                  *
+*                                                               *
+*****************************************************************
+You may now enter the code:  2
+Enter triangle's base (integer): 21
+X
+X
+*
+**
+***
+****
+*****
+******
+*******
+********
+*********
+**********
+***********
+************
+*************
+**************
+***************
+****************
+*****************
+******************
+*******************
+********************
+*********************
+X
+X
+X
+*****************************************************************
+**************** WELCOME TO THE PATTERN PRINTER! ****************
+*                                                               *
+*  Enter a code of 1 to print a square pattern of stars         *
+*  Enter a code of 2 to print a right triangle pattern of stars *
+*  Enter a code of 3 to print a diamond pattern of stars        *
+*  Enter a code of 0 to stop printing patterns                  *
+*                                                               *
+*****************************************************************
+You may now enter the code:  3
+Enter the diamond's width (integer): 15
+X
+X
+X       *
+X      ***
+X     *****
+X    *******
+X   *********
+X  ***********
+X *************
+***************
+X *************
+X  ***********
+X   *********
+X    *******
+X     *****
+X      ***
+X       *
+X
+X
+X
+*****************************************************************
+**************** WELCOME TO THE PATTERN PRINTER! ****************
+*                                                               *
+*  Enter a code of 1 to print a square pattern of stars         *
+*  Enter a code of 2 to print a right triangle pattern of stars *
+*  Enter a code of 3 to print a diamond pattern of stars        *
+*  Enter a code of 0 to stop printing patterns                  *
+*                                                               *
+*****************************************************************
+You may now enter the code:  5
+Incorrect code. Enter 1, 2, 3, or 0.
+X
+*****************************************************************
+**************** WELCOME TO THE PATTERN PRINTER! ****************
+*                                                               *
+*  Enter a code of 1 to print a square pattern of stars         *
+*  Enter a code of 2 to print a right triangle pattern of stars *
+*  Enter a code of 3 to print a diamond pattern of stars        *
+*  Enter a code of 0 to stop printing patterns                  *
+*                                                               *
+*****************************************************************
+You may now enter the code:  0
+X
+*****************************************************************
+*                          GOOD BYE!!!                          *
+*****************************************************************
+X
+[n00448518@osprey proj3]$ exit
+X
+Script done on Tue 13 Jun 2017 10:55:40 PM EDT
+SHAR_EOF
+  (set 20 17 06 13 22 55 40 'myshapes'; eval "$shar_touch") &&
+  chmod 0644 'myshapes'
+if test $? -ne 0
+then ${echo} 'restore of myshapes failed'
+fi
+  if ${md5check}
+  then (
+       ${MD5SUM} -c >/dev/null 2>&1 || ${echo} 'myshapes: MD5 check failed'
+       ) << \SHAR_EOF
+b1fbf0b748263adf9ad9b50d41287ff1  myshapes
+SHAR_EOF
+  else
+test `LC_ALL=C wc -c < 'myshapes'` -ne 4636 && \
+  ${echo} 'restoration warning:  size of myshapes is not 4636'
+  fi
+fi
+# ============= shapes.c ==============
+if test -f 'shapes.c' && test "$first_param" != -c; then
+  ${echo} 'x -SKIPPING shapes.c (file already exists)'
+else
+${echo} 'x - extracting shapes.c (text)'
+  sed 's/^X//' << 'SHAR_EOF' > 'shapes.c' &&
+/*  This program will print a particular shape of a particular size based
+X *  on the user's input. The user will be able to choose between a square,
+X *  right triangle and a diamond. After printing a shape the program will
+X *  let the user print more shapes of different sizes until tasked to 
+X *  stop.
+X *
+X *      Written by: Samuel Schwartz
+X *      Last Update: 9:58 PM June 13, 2017
+X */
+X
+#include <stdio.h>
+X
+// Function Declarations
+void display_greeting_message (void);  
+void print_square (void);
+void print_triangle (void);
+void print_diamond (void);
+void print_stars (int);
+void print_blanks (int);
+void display_goodbye_message (void);
+X
+int main (void)
+{
+X    int code; // Entry code to determine which shape to print
+X
+X    display_greeting_message(); // Call to greeting
+X    scanf("%d", &code);         // Obtain code from keyboard  
+X  
+X    while (code != 0)    // Based on code entered by user this will 
+X    {                    // call the specfific shape function  
+X        switch (code)    // or display an error message for bad input.
+X        {
+X            case 1: print_square();
+X                    break;
+X            case 2: print_triangle();
+X                    break;
+X            case 3: print_diamond();
+X                    break;
+X            default: printf("Incorrect code. Enter 1, 2, 3, or 0.\n");
+X        } // switch
+X
+X    display_greeting_message(); //After shape prints greeting is
+X    scanf("%d", &code);         //printed again allowing for new
+X                                //code entry and obtain code.             
+X    } // while
+X        
+X    display_goodbye_message();     //Prints goodbye as program exits.
+X
+X    return 0;
+X
+} // main
+X
+X  
+X
+void display_greeting_message (void) 
+{
+X  //Print greeting message when function is called.
+X    printf("\n");
+X    printf("*****************************************************************\n");
+X    printf("**************** WELCOME TO THE PATTERN PRINTER! ****************\n");
+X    printf("*                                                               *\n");
+X    printf("*  Enter a code of 1 to print a square pattern of stars         *\n");
+X    printf("*  Enter a code of 2 to print a right triangle pattern of stars *\n");
+X    printf("*  Enter a code of 3 to print a diamond pattern of stars        *\n");
+X    printf("*  Enter a code of 0 to stop printing patterns                  *\n");
+X    printf("*                                                               *\n"); 
+X    printf("*****************************************************************\n");
+X
+X    printf("You may now enter the code:  "); //Prompt for code entry.
+X
+X    return;
+X
+}  // display_greeting_message
+X
+void print_square (void)
+{
+X    int side;        // Length of square's side
+X    int i;           // Index used in for loop
+X
+X    printf("Enter the size of the square (integer): "); //Prompt square size
+X    scanf("%d", &side);                                 //Obtain square size
+X
+X    printf("\n\n");                   //Output Spacing
+X
+X    for (i = 1; i <= side; i++)       //Prints a # of rows equal to  
+X    {                                 //the side length.
+X        print_stars(side);            //Function call to print an amount 
+X        printf("\n");                 //of stars equal to side length.
+X    } // for
+X    
+X    printf("\n\n");                   //Output Spacing        
+X
+X    return;
+X
+}  // print_square
+X
+void print_triangle (void)
+{
+X    int base;        //Base length of right triangle.
+X    int i;           //Index used in for loop.
+X
+X    printf("Enter triangle's base (integer): "); //Prompt triangle base
+X    scanf("%d", &base);                        //Obtain base from keyboard
+X
+X    printf("\n\n");              //Output Spacing
+X
+X    for (i = 1; i <= base; i++)  //Prints a # of rows equal to base length
+X    {
+X        print_stars (i);         //Prints a # of stars that increments by 
+X        printf("\n");            //one with each new row. 
+X    } // for
+X   
+X    printf("\n\n");              //Output Spacing
+X
+X    return;
+X
+}  // print_triangle
+X
+void print_diamond (void)
+{
+X    int width;    //Width of the diamond
+X    int blanks;   //Amount of blanks to print to align diamond rows
+X    int i;        //index used in for loops
+X
+X    printf("Enter the diamond's width (integer): "); //Prompt diamond width
+X    scanf("%d", &width);                        //Obtain width from keyboard 
+X
+X    printf("\n\n");      //Output Spacing
+X
+X    if (width % 2)       //If width is odd, do nothing 
+X        ;                
+X    else                 //If even add 1 to be able to print a symmetric
+X        width++;         //diamond.   
+X
+X    blanks = width / 2;  //Set amount of blanks required for first row.
+X
+X    for (i = 1; i <= (width / 2 + 1); i++) //Prints top part of diamond
+X    {                                      //and middle row.
+X        print_blanks(blanks--);   //Print blanks so stars are centered
+X        print_stars(i * 2 - 1);   //Print stars to fit diamond pattern
+X        printf("\n");            
+X    } // for
+X    
+X    blanks = 0;     //Reset blanks to 0 after last decrement made it -1.
+X
+X    for (i = (width / 2); i > 0; i--)  //Prints bottom part of diamond
+X    {
+X        print_blanks(++blanks);      //Print blanks to center stars.
+X        print_stars(i * 2 - 1);      //Print stars to fit diamond pattern
+X        printf("\n");
+X    } // for
+X
+X    printf("\n\n");               //Output Spacing
+X
+X    return;
+X
+}  // print_diamond
+X
+void print_stars (int size)
+{
+X    int i;   //Index used in for loop
+X
+X    for (i = 1; i <= size; i++)  //Prints stars based on parameter sent by 
+X    {                            //calling function.
+X        printf("*");
+X    } // for
+X
+X    return;
+X
+}  // print_stars
+X
+void print_blanks (int spaces)
+{
+X    int i;   //Index used in for loop
+X    
+X    for (i = 1; i <= spaces; i++)  //Prints blanks based on parameter sent
+X    {                              //by calling function.
+X        printf(" ");
+X    } // for
+X
+X    return;
+X
+}  // print_blanks
+X
+void display_goodbye_message (void)
+{   
+X  //Print goodbye message when function is called.
+X    printf("\n");
+X    printf("*****************************************************************\n");
+X    printf("*                          GOOD BYE!!!                          *\n");
+X    printf("*****************************************************************\n");
+X    printf("\n");
+X
+X    return;
+X
+}  // display_goodbye_message
+SHAR_EOF
+  (set 20 17 06 14 12 26 32 'shapes.c'; eval "$shar_touch") &&
+  chmod 0644 'shapes.c'
+if test $? -ne 0
+then ${echo} 'restore of shapes.c failed'
+fi
+  if ${md5check}
+  then (
+       ${MD5SUM} -c >/dev/null 2>&1 || ${echo} 'shapes.c: MD5 check failed'
+       ) << \SHAR_EOF
+469a6b62f6a36a13bbd608c98b5ab7d6  shapes.c
+SHAR_EOF
+  else
+test `LC_ALL=C wc -c < 'shapes.c'` -ne 6369 && \
+  ${echo} 'restoration warning:  size of shapes.c is not 6369'
+  fi
+fi
+if rm -fr ${lock_dir}
+then ${echo} 'x - removed lock directory `'${lock_dir}\''.'
+else ${echo} 'x - failed to remove lock directory `'${lock_dir}\''.'
+  exit 1
+fi
+exit 0

@@ -1,0 +1,12 @@
+Script started on Mon 15 May 2017 04:02:54 PM EDT
+[n00448518@osprey ~]$ cd cop2220/proj0
+[n00448518@osprey proj0]$ gcc -o tryout try,c[K[K.c
+[n00448518@osprey proj0]$ ./tryout
+Enter length in feet: 10.5
+Enter width in feet: 9.3
+Length:      10.50 Feet
+Width :       9.30 Feet
+Area :      97.65 Sq. Feet
+[n00448518@osprey proj0]$ exit
+
+Script done on Mon 15 May 2017 04:03:51 PM EDT

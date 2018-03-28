@@ -1,0 +1,27 @@
+Script started on Mon 15 May 2017 03:52:08 PM EDT
+[n00448518@osprey ~]$ ls
+typescript
+[n00448518@osprey ~]$ mkdir cop2220
+[n00448518@osprey ~]$ cd cop222-[K0
+[n00448518@osprey cop2220]$ mkdir prok0[K[Kj0
+[n00448518@osprey cop2220]$ pwd
+/home/18/n00448518/cop2220
+[n00448518@osprey cop2220]$ cd
+[n00448518@osprey ~]$ pwd
+/home/18/n00448518
+[n00448518@osprey ~]$ ls -l
+total 4
+drwxr-xr-x. 3 n00448518 student 4096 May 15 15:52 [0m[01;34mcop2220[0m
+-rw-r--r--. 1 n00448518 student    0 May 15 15:52 typescript
+[m[n00448518@osprey ~]$ chmod g-x cop2220o-x cop2220
+[n00448518@osprey ~]$ ls -l
+total 4
+drwxr--r--. 3 n00448518 student 4096 May 15 15:52 [0m[01;34mcop2220[0m
+-rw-r--r--. 1 n00448518 student    0 May 15 15:52 typescript
+[m[n00448518@osprey ~]$ ls -lchmod go-x cop2220[C[Cx cop2220[K+x cop2220
+[n00448518@osprey ~]$ cd cop2220/proj0
+[n00448518@osprey proj0]$ pwd
+/home/18/n00448518/cop2220/proj0
+[n00448518@osprey proj0]$ exit
+
+Script done on Mon 15 May 2017 03:54:19 PM EDT

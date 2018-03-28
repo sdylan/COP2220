@@ -1,0 +1,310 @@
+#!/bin/sh
+# This is a shell archive (produced by GNU sharutils 4.7).
+# To extract the files from this archive, save it to some FILE, remove
+# everything before the `#!/bin/sh' line above, then type `sh FILE'.
+#
+lock_dir=_sh20102
+# Made on 2017-05-26 19:22 EDT by <n00448518@osprey.unfcsd.unf.edu>.
+# Source directory was `/home/18/n00448518/cop2220/proj1'.
+#
+# Existing files will *not* be overwritten, unless `-c' is specified.
+#
+# This shar contains:
+# length mode       name
+# ------ ---------- ------------------------------------------
+#   3061 -rw-r--r-- bill.c
+#   2054 -rw-r--r-- mybills
+#
+MD5SUM=${MD5SUM-md5sum}
+f=`${MD5SUM} --version | egrep '^md5sum .*(core|text)utils'`
+test -n "${f}" && md5check=true || md5check=false
+${md5check} || \
+  echo 'Note: not verifying md5sums.  Consider installing GNU coreutils.'
+save_IFS="${IFS}"
+IFS="${IFS}:"
+gettext_dir=FAILED
+locale_dir=FAILED
+first_param="$1"
+for dir in $PATH
+do
+  if test "$gettext_dir" = FAILED && test -f $dir/gettext \
+     && ($dir/gettext --version >/dev/null 2>&1)
+  then
+    case `$dir/gettext --version 2>&1 | sed 1q` in
+      *GNU*) gettext_dir=$dir ;;
+    esac
+  fi
+  if test "$locale_dir" = FAILED && test -f $dir/shar \
+     && ($dir/shar --print-text-domain-dir >/dev/null 2>&1)
+  then
+    locale_dir=`$dir/shar --print-text-domain-dir`
+  fi
+done
+IFS="$save_IFS"
+if test "$locale_dir" = FAILED || test "$gettext_dir" = FAILED
+then
+  echo=echo
+else
+  TEXTDOMAINDIR=$locale_dir
+  export TEXTDOMAINDIR
+  TEXTDOMAIN=sharutils
+  export TEXTDOMAIN
+  echo="$gettext_dir/gettext -s"
+fi
+if (echo "testing\c"; echo 1,2,3) | grep c >/dev/null
+then if (echo -n test; echo 1,2,3) | grep n >/dev/null
+     then shar_n= shar_c='
+'
+     else shar_n=-n shar_c= ; fi
+else shar_n= shar_c='\c' ; fi
+f=shar-touch.$$
+st1=200112312359.59
+st2=123123592001.59
+st2tr=123123592001.5 # old SysV 14-char limit
+st3=1231235901
+
+if touch -am -t ${st1} ${f} >/dev/null 2>&1 && \
+   test ! -f ${st1} && test -f ${f}; then
+  shar_touch='touch -am -t $1$2$3$4$5$6.$7 "$8"'
+
+elif touch -am ${st2} ${f} >/dev/null 2>&1 && \
+   test ! -f ${st2} && test ! -f ${st2tr} && test -f ${f}; then
+  shar_touch='touch -am $3$4$5$6$1$2.$7 "$8"'
+
+elif touch -am ${st3} ${f} >/dev/null 2>&1 && \
+   test ! -f ${st3} && test -f ${f}; then
+  shar_touch='touch -am $3$4$5$6$2 "$8"'
+
+else
+  shar_touch=:
+  echo
+  ${echo} 'WARNING: not restoring timestamps.  Consider getting and'
+  ${echo} 'installing GNU `touch'\'', distributed in GNU coreutils...'
+  echo
+fi
+rm -f ${st1} ${st2} ${st2tr} ${st3} ${f}
+#
+if test ! -d ${lock_dir}
+then : ; else ${echo} 'lock directory '${lock_dir}' exists'
+  exit 1
+fi
+if mkdir ${lock_dir}
+then ${echo} 'x - created lock directory `'${lock_dir}\''.'
+else ${echo} 'x - failed to create lock directory `'${lock_dir}\''.'
+  exit 1
+fi
+# ============= bill.c ==============
+if test -f 'bill.c' && test "$first_param" != -c; then
+  ${echo} 'x -SKIPPING bill.c (file already exists)'
+else
+${echo} 'x - extracting bill.c (text)'
+  sed 's/^X//' << 'SHAR_EOF' > 'bill.c' &&
+/* This program will calculate the cost of installing carpet in one room.
+X   The user will enter the room's dimensions, a discount rate to be 
+X   applied, and the price per square foot of carpet. The program then 
+X   calculates and displays the individual costs, discount value, subtotal, 
+X   tax and total in a bill form. 
+X      Written by: Samuel Schwartz
+X      Last Update: 5/22/2017, 11:24 AM
+*/
+X
+#include <stdio.h>
+#define LABOR_UNIT_PRICE 0.35 
+#define TAX_RATE 0.085
+X
+int main (void)
+{
+X   //Local Declarations
+X    int length;             //length of room
+X    int width;              //width of room
+X    int area;               //area of room
+X    int discountRate;       //percentage of discount
+X    float carpetUnitPrice;  //price per sq. ft. of carpet
+X    float carpetPrice;      //price of carpet for calculated area
+X    float laborPrice;       //price of labor for calculated area
+X    float installedPrice;   //price of labor and carpet together 
+X    float discountValue;    //monetary discount amount
+X    float subtotal;         //subtotal after the discount is applied
+X    float tax;              //monetary tax amount
+X    float total;            //total price after tax and discount
+X  
+X  //Statements
+X
+X   //Prompt user for length, width, discount rate, and carpet cost/sq ft
+X    printf("Enter Length (feet, integer):               ");
+X    scanf("%d", &length);
+X    printf("Enter Width (feet, integer):                ");
+X    scanf("%d", &width);
+X    printf("Enter Customer Discount (Percent, integer): ");
+X    scanf("%d", &discountRate);
+X    printf("Enter Carpet Cost per square foot (xxx.xx): ");
+X    scanf("%f", &carpetUnitPrice);
+X
+X   //Calculate the variables to be displayed in CHARGES
+X    area = length * width;
+X    carpetPrice = carpetUnitPrice * area;
+X    laborPrice = LABOR_UNIT_PRICE * area;
+X    installedPrice = carpetPrice + laborPrice;
+X    discountValue = discountRate * 0.01 * installedPrice;
+X    subtotal = installedPrice  - discountValue;
+X    tax = subtotal * TAX_RATE;
+X    total = subtotal + tax;
+X
+X   //Print the information in an organized bill-like format.
+X    printf("\n\n\t\t\tMEASUREMENTS\n\n");
+X    printf("Length\t\t   %3d ft.\n", length);
+X    printf("Width\t\t   %3d ft.\n", width);
+X    printf("Area\t\t   %3d sq. ft.\n", area);
+X    printf("\n\n\n\t\t\tCHARGES\n\nDESCRIPTION\tCOST/SQ.FT.\t\t  CHARGE\n");
+X    printf("-----------\t-----------\t\t----------\n");
+X    printf("Carpet\t\t%5.2f\t\t\t$%8.2f\n", carpetUnitPrice, carpetPrice);
+X    printf("Labor\t\t %04.2f\t\t\t$%8.2f\n\t\t\t\t\t----------\n", LABOR_UNIT_PRICE, 
+X                                                                   laborPrice);
+X    printf("INSTALLED PRICE\t\t\t\t$%8.2f\n", installedPrice);
+X    printf("Discount\t%5d%%\t\t\t$%8.2f\n\t\t\t\t\t----------\n", discountRate, 
+X                                                                  discountValue);
+X    printf("SUBTOTAL\t\t\t\t$%8.2f\n", subtotal);
+X    printf("Tax\t\t\t\t\t$%8.2f\n", tax);
+X    printf("TOTAL\t\t\t\t\t$%8.2f\n\t\t\t\t\t----------\n", total);  
+X    
+X    return 0;
+}  //End Main
+SHAR_EOF
+  (set 20 17 05 26 19 21 11 'bill.c'; eval "$shar_touch") &&
+  chmod 0644 'bill.c'
+if test $? -ne 0
+then ${echo} 'restore of bill.c failed'
+fi
+  if ${md5check}
+  then (
+       ${MD5SUM} -c >/dev/null 2>&1 || ${echo} 'bill.c: MD5 check failed'
+       ) << \SHAR_EOF
+0ac0cb4223396addfb6a34cda46660fc  bill.c
+SHAR_EOF
+  else
+test `LC_ALL=C wc -c < 'bill.c'` -ne 3061 && \
+  ${echo} 'restoration warning:  size of bill.c is not 3061'
+  fi
+fi
+# ============= mybills ==============
+if test -f 'mybills' && test "$first_param" != -c; then
+  ${echo} 'x -SKIPPING mybills (file already exists)'
+else
+${echo} 'x - extracting mybills (text)'
+  sed 's/^X//' << 'SHAR_EOF' > 'mybills' &&
+Script started on Mon 22 May 2017 02:22:07 AM EDT
+[n00448518@osprey proj1]$ rm a,[K.out
+[n00448518@osprey proj1]$ gcc -o bills bill.c
+[n00448518@osprey proj1]$ ./bills
+Enter Length (feet, integer):		    23
+Enter Width (feet, integer):		    13
+Enter Customer Discount (Percent, integer): 12
+Enter Carpet Cost per square foot (xxx.xx): 14.28
+X
+X
+X			MEASUREMENTS
+X
+Length		    23 ft.
+Width		    13 ft.
+Area		   299 sq. ft.
+X
+X
+X
+X			CHARGES
+X
+DESCRIPTION	COST/SQ.FT.		  CHARGE
+-----------	-----------		----------
+Carpet		14.28			$ 4269.72
+Labor		 0.35			$  104.65
+X					----------
+INSTALLED PRICE				$ 4374.37
+Discount	   12%			$  524.92
+X					----------
+SUBTOTAL				$ 3849.45
+Tax					$  327.20
+TOTAL					$ 4176.65
+X					----------
+[n00448518@osprey proj1]$ ./bills
+Enter Length (feet, integer):		    35
+Enter Width (feet, integer):		    8
+Enter Customer Discount (Percent, integer): 0
+Enter Carpet Cost per square foot (xxx.xx): 8.00
+X
+X
+X			MEASUREMENTS
+X
+Length		    35 ft.
+Width		     8 ft.
+Area		   280 sq. ft.
+X
+X
+X
+X			CHARGES
+X
+DESCRIPTION	COST/SQ.FT.		  CHARGE
+-----------	-----------		----------
+Carpet		 8.00			$ 2240.00
+Labor		 0.35			$   98.00
+X					----------
+INSTALLED PRICE				$ 2338.00
+Discount	    0%			$    0.00
+X					----------
+SUBTOTAL				$ 2338.00
+Tax					$  198.73
+TOTAL					$ 2536.73
+X					----------
+[n00448518@osprey proj1]$ ./bills
+Enter Length (feet, integer):		    14
+Enter Width (feet, integer):		    11
+Enter Customer Discount (Percent, integer): 10
+Enter Carpet Cost per square foot (xxx.xx): 22.25
+X
+X
+X			MEASUREMENTS
+X
+Length		    14 ft.
+Width		    11 ft.
+Area		   154 sq. ft.
+X
+X
+X
+X			CHARGES
+X
+DESCRIPTION	COST/SQ.FT.		  CHARGE
+-----------	-----------		----------
+Carpet		22.25			$ 3426.50
+Labor		 0.35			$   53.90
+X					----------
+INSTALLED PRICE				$ 3480.40
+Discount	   10%			$  348.04
+X					----------
+SUBTOTAL				$ 3132.36
+Tax					$  266.25
+TOTAL					$ 3398.61
+X					----------
+[n00448518@osprey proj1]$ exit
+X
+Script done on Mon 22 May 2017 02:23:37 AM EDT
+SHAR_EOF
+  (set 20 17 05 22 02 23 37 'mybills'; eval "$shar_touch") &&
+  chmod 0644 'mybills'
+if test $? -ne 0
+then ${echo} 'restore of mybills failed'
+fi
+  if ${md5check}
+  then (
+       ${MD5SUM} -c >/dev/null 2>&1 || ${echo} 'mybills: MD5 check failed'
+       ) << \SHAR_EOF
+bd04193d14328956c88a469447e2041b  mybills
+SHAR_EOF
+  else
+test `LC_ALL=C wc -c < 'mybills'` -ne 2054 && \
+  ${echo} 'restoration warning:  size of mybills is not 2054'
+  fi
+fi
+if rm -fr ${lock_dir}
+then ${echo} 'x - removed lock directory `'${lock_dir}\''.'
+else ${echo} 'x - failed to remove lock directory `'${lock_dir}\''.'
+  exit 1
+fi
+exit 0
